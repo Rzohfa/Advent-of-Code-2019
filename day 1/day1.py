@@ -1,44 +1,45 @@
 import math
 
 
-def task1():
+file_path = 'input.txt'
 
-    filepath = 'input.txt'
+
+def task_1():
+
     result = 0
 
-    with open(filepath) as file:
-        lineText = file.readline()
-        while lineText:
-            tempResult = int(lineText)
-            tempResult = math.floor(tempResult/3)
-            tempResult -= 2
-            result += tempResult
-            lineText = file.readline()
+    with open(file_path) as file:
+        line_text = file.readline()
+        while line_text:
+            temp_result = int(line_text)
+            temp_result = math.floor(temp_result/3)
+            temp_result -= 2
+            result += temp_result
+            line_text = file.readline()
 
     return result
 
 
-def task2():
+def task_2():
 
-    filepath = 'input.txt'
     result = 0
 
-    with open(filepath) as file:
-        lineText = file.readline()
-        while lineText:
-            tempResult = int(lineText)
-            while tempResult > 0:
-                tempResult = math.floor(tempResult/3)
-                tempResult -= 2
-                result += tempResult
-            result -= tempResult
-            lineText = file.readline()
+    with open(file_path) as file:
+        line_text = file.readline()
+        while line_text:
+            temp_result = int(line_text)
+            while temp_result > 0:
+                temp_result = math.floor(temp_result/3)
+                temp_result -= 2
+                result += temp_result
+            result -= temp_result
+            line_text = file.readline()
 
     return result
 
 
 if __name__ == '__main__':
     print('Task 1:')
-    print("\t{}\n".format(task1()))
+    print("\t{}\n".format(task_1()))
     print('Task 2:')
-    print("\t{}\n".format(task2()))
+    print("\t{}\n".format(task_2()))
