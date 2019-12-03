@@ -40,15 +40,14 @@ def opcode_2(PC: int):
     program_listing [ program_listing [PC+3] ] = program_listing [ program_listing [PC+1] ] * program_listing [ program_listing [PC+2] ] 
 
 
-def opcode_99():
-    print('\n\tTHE END')
-    print('\n\tLeft at position 0: {}\n\n'.format(program_listing[0]))
+def opcode_99(fancy_output: bool):
+    if fancy_output:
+        print('\n\tTHE END')
+        print('\n\tOutput: {}\n\n'.format(program_listing[0]))
+    return program_listing[0]
 
 
-
-def task_1():
-    program_listing[1] = 12
-    program_listing[2] = 2
+def intcode_computer(fancy_output: bool):
     for i in range(0, len(program_listing), 4):
         if program_listing[i] == 1:
             opcode_1(i)
@@ -58,9 +57,32 @@ def task_1():
             break
         else:
             print('Wrong opcode on index {}!'.format(i))
-    opcode_99()
+    return opcode_99(fancy_output)
+
+
+def task_1(fancy_output: bool):
+    load_listing()
+    program_listing[1] = 12
+    program_listing[2] = 2
+    intcode_computer(fancy_output)
+
+
+def task_2(fancy_output: bool):
+    result = ()
+    for noun in range(0, 100):
+        for verb in range(0, 100):
+            load_listing()
+            program_listing[1] = noun
+            program_listing[2] = verb
+            if intcode_computer(fancy_output) == 19690720:
+                result = (noun, verb)
+                break
+            program_listing.clear()
+    print(result)
+    out = 100 * result[0] + result[1]
+    print(out)
 
 
 if __name__ == '__main__':
-    load_listing()
-    task_1()
+    task_1(True)
+    task_2(False)
