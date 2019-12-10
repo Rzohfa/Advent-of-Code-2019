@@ -7,17 +7,14 @@ program_listing = []
 def load_listing():
     file = open(filepath)
     text = file.readline()
-    index_count = 0
     index_old = 0
 
     for i in range(0, len(text)):
         if text[i] == ',':
             program_listing.append(int(text[index_old:i]))
             index_old = i+1
-            index_count += 1   
 
-    program_listing.append(int(text[index_old:len(text)]))
-    index_count += 1 
+    program_listing.append(int(text[index_old:len(text)])) 
 
 
 def opcode_1(PC: int):
@@ -71,13 +68,13 @@ def task_2(fancy_output: bool):
     result = ()
     for noun in range(0, 100):
         for verb in range(0, 100):
+            program_listing.clear()
             load_listing()
             program_listing[1] = noun
             program_listing[2] = verb
             if intcode_computer(fancy_output) == 19690720:
                 result = (noun, verb)
                 break
-            program_listing.clear()
     print(result)
     out = 100 * result[0] + result[1]
     print(out)
